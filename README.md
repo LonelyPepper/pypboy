@@ -1,10 +1,10 @@
 pypboy
 ======
 
-Notes from ZapWizard:
-This is a work in progress of the code for my Functional Pip-Boy 3000 MK IV.
-I branched off from the Fallout 3 style Pip-Boy 3000 code.
-The graphics are positioned for a 720x720 display.
+This is a modified version of ZapWizard's Pipboy 3000 MkIV software forked from the original, with the
+intent of cleaning up the code, making it run more efficiently on Raspberry Pi, and more importantly, adding Touchscreen support
+such that projects running on a lower-complexity build of the Pipboy 3D Print can operate without requiring all the proper dials
+and other such bells and whistles.
 
 ======
 
@@ -12,11 +12,12 @@ Adding radio stations is now as easy as making a folder in sounds/radio with MP3
 Make a file name Station.py, with station_name = "Your name here" to set the menu text. The folder name used if the file is missing.
 Add a number to the beginning of the folder name to set the menu position.
 
-If you want the original in-game music you can use the B.A.E. program to extract the files from the game, then the Yakitori Audio Converter to convert them back to MP3 files.
-
 ======
 
 Navigation:
+
+Over time, I plan to make clicking and/or tapping perform the necessary operations, but the keyboard controls will remain in for testing/convenience.
+
 F1 - Stats
 F2 - Inventory
 F3 - Data
