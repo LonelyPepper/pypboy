@@ -40,6 +40,8 @@ Supports caching and offline loading of maps.
 * In settings.py set 'LOAD_CACHED_MAP = True'
 * Pypboy will now load the cached map on starting
 
+* Man I have no idea how this is supposed to work, something deep in the files goes wrong when you try to load coordinates of a map. I recommend not changing the coordinates at all if you run it and simply using the cached Boston map. Again, I intend to fix this, but have not spent enough time with this codebase to understand what's going wrong.
+
 ======
 
 ## Autors
