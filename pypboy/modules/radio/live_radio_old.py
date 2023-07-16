@@ -14,10 +14,6 @@ import sys
 import threading
 import numpy as np
 
-# NOTE: I HAVE ABSOLUTELY BUTCHERED THIS FILE FOR MY OWN PERSONAL NEEDS! IF YOU SOMEHOW COME ACROSS THIS AND WANT TO
-# USE IT, RENAME THIS FILE AND RENAME "live_radio_old.py" TO THIS ONE'S NAME, "live_radio.py". THIS WILL LIKELY
-# WORK BETTER FOR MOST USERS. SORRY
-
 from pypboy.modules.data import entities
 import pypboy.data
 
@@ -111,9 +107,10 @@ class Module(pypboy.SubModule):
         self.add(self.menu)
         self.menu.select(settings.STATION)
 
-        # i removed footer code that was here because it's literally not there in the game, not sure why it was added-?
-        # reference zapwizard's code if anyone ever even looks at this, let alone desires the footer back
-        # @TODO: Create a setting in settings to make this a toggleable feature
+        self.footer = pypboy.ui.Footer(settings.FOOTER_RADIO)
+        self.footer.rect[0] = settings.footer_x
+        self.footer.rect[1] = settings.footer_y
+        self.add(self.footer)
 
     def select_station(self, station):
         if hasattr(self, 'active_station') and self.active_station:
@@ -163,7 +160,7 @@ class Module(pypboy.SubModule):
         folders = []
         stations = []
         self.station_name = None
-        self.station_ordered = False
+        self.station_ordered = True
 
         for f in sorted(os.listdir(self.audiofolders)):
             if not f.endswith("/"):
@@ -177,7 +174,7 @@ class Module(pypboy.SubModule):
                 print("No .ogg files in:", folder)
                 continue
 
-            song_data = self.load_files(folder) # MARKER
+            song_data = self.load_files(folder)
             self.station_files = song_data[0]
             self.station_lengths = song_data[1]
             self.total_length = sum(self.station_lengths)
@@ -201,7 +198,7 @@ class Module(pypboy.SubModule):
             if self.station_ordered == False:
                 # print("randomizing", folder)
                 seed = random.random()
-                random.Random(seed).shuffle(self.station_files) # MARKER
+                random.Random(seed).shuffle(self.station_files)
                 random.Random(seed).shuffle(self.station_lengths)
 
             station_data = self.station_name, folder, self.station_files, self.station_ordered, self.station_lengths, self.total_length
@@ -219,6 +216,8 @@ class Module(pypboy.SubModule):
                 song_lengths.append(mutagen.File("./" + folder + "/" + file).info.length)
 
         return [files, song_lengths]
+
+
 
 class Animation(game.Entity):
 
@@ -337,20 +336,17 @@ class RadioStation(game.Entity):
         self.last_filename = None
         self.start_time = time.time()
         self.sum_of_song_lengths = 0
-        # self.start_pos = 0
-        self.start_pos = (random.random() % 120) # generate random song starting position
+        self.start_pos = 0
         self.static = pygame.mixer.Sound("sounds/pipboy/Radio/UI_Pipboy_Radio_StaticBackground_LP.ogg")
         pygame.mixer.music.set_endevent(settings.EVENTS['SONG_END'])
 
     def play_song(self):
-        global song, start_pos, waveform, song_length, waveform_length, song_fileload #import globals
-        # self.start_pos = 0 # this doesn't fix it
-        self.start_pos = random.random() % 120  #re-randomize each time you enter a song, you know, for fun
-
+        global song, start_pos, waveform, song_length, waveform_length, song_fileload
+        self.start_pos = 0
         if settings.SOUND_ENABLED:
-            if self.files[0].endswith("Silence.ogg"): # i don't hate this anymore
-                settings.AMPLITUDE = []               # it actually makes a lotta sense, huh
-                song = None                           # zapwizard is sloppy, but has some good ideas
+            if self.files[0].endswith("Silence.ogg"):
+                settings.AMPLITUDE = []
+                song = None
                 start_pos = 0
                 waveform = []
                 waveform_length = 0
@@ -360,20 +356,20 @@ class RadioStation(game.Entity):
                 print("Radio off")
                 self.stop()
             else:
-               # if hasattr(self, 'last_filename') and self.last_filename:  # NOT support resuming teehee
-                #    self.start_pos = self.last_playpos + (time.time() - self.last_playtime)
-                #    print("Resuming song:", self.last_filename)
-                #    self.filename = self.last_filename
-                #    self.last_filename = None
+                if hasattr(self, 'last_filename') and self.last_filename:  # Support resuming
+                    self.start_pos = self.last_playpos + (time.time() - self.last_playtime)
+                    print("Resuming song:", self.last_filename)
+                    self.filename = self.last_filename
+                    self.last_filename = None
 
-                if self.files: #chanegd from elif to if
+                elif self.files:
                     if self.new_selection:  # If changed stations manually
-                        self.randomize_station()
-                        self.static.play() # what does this do
+                        self.static.play()
                         song_length = self.song_lengths[0]  # length of the current song
-                        self.start_pos = random.random() % song_length # set random startpos from beginning to end
+                        self.start_pos = time.time() - self.start_time
                         # print("time based start_pos =", self.start_pos)
-                        if self.start_pos > song_length: # accounts for startpos being longer than a given song
+
+                        if self.start_pos > song_length:
                             i = 0
                             lengths = list(self.song_lengths)
                             if self.start_pos > self.station_length:
@@ -400,7 +396,7 @@ class RadioStation(game.Entity):
                                       "self.sum_of_song_lengths", self.sum_of_song_lengths
                                       )
 
-                        self.new_selection = False # this does not seem to randomize song, but may randomize song on start, but it possibly does nothing
+                        self.new_selection = False
 
                     else:
                         # print("Same station, new song")
@@ -456,7 +452,7 @@ class RadioStation(game.Entity):
         if settings.SOUND_ENABLED:
             if self.state == self.STATES['paused']:
                 pygame.mixer.music.unpause()
-                self.state = self.STATES['playing'] # @TODO: figure out how to better modularize these stats, this shouldn't just be hanging around
+                self.state = self.STATES['playing']
             else:
                 self.play_song()
             print("Music resumed")
