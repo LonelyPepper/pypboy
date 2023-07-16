@@ -95,6 +95,7 @@ class Pypboy(game.core.Engine):
                 self.active.handle_action(action)
 
     def handle_event(self, event):
+        pygame.mouse.set_visible(True) # set mouse visible for measurement, hacked into position @TODO: REMOVE
         if event.type == pygame.KEYDOWN:  # Some key has been pressed
             # Persistent Events:
             if event.key == pygame.K_ESCAPE:  # ESC
@@ -115,6 +116,39 @@ class Pypboy(game.core.Engine):
             else:
                 if event.key in settings.ACTIONS:  # Check action based on key in settings
                     self.handle_action(settings.ACTIONS[event.key])
+
+        elif event.type == pygame.MOUSEBUTTONDOWN: # making the touch code synced with mouse for PC testing
+            pos = pygame.mouse.get_pos()
+            if 48 <= pos[1] <= 88: # check if click is in bar row
+                if 100 <= pos[0] <= 170: # stat
+                    self.handle_action("module_stats")
+                elif 200 <= pos[0] <= 260: # inv
+                    self.handle_action("module_items")
+                elif 285 <= pos[0] <= 390: # data
+                    self.handle_action("module_data")
+                elif 410 <= pos[0] <= 475: # map
+                    self.handle_action("module_map")
+                elif 515 <= pos[0] <= 610: # radio
+                    self.handle_action("module_radio")
+                else:
+                    pass
+
+
+        elif event.type == pygame.FINGERDOWN: # handling touchscreen inputs, using switchmodule for now
+            pos = pygame.finger.get_pos();
+            if 48 <= pos[1] <= 88: # check if tap is in bar row
+                if 100 <= pos[0] <= 170: # stat
+                    self.handle_action("module_stats")
+                elif 200 <= pos[0] <= 260: # inv
+                    self.handle_action("module_items")
+                elif 285 <= pos[0] <= 390: # data
+                    self.handle_action("module_data")
+                elif 410 <= pos[0] <= 475: # map
+                    self.handle_action("module_map")
+                elif 515 <= pos[0] <= 610: # radio
+                    self.handle_action("module_radio")
+                else:
+                    pass
 
         elif event.type == pygame.QUIT:
             self.running = False

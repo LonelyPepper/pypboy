@@ -5,12 +5,13 @@ import saved
 import os
 
 # Custom
-name = "ZapWizard"
+name = "Biscuits"
 
 # SCREEN
 WIDTH = 720
 HEIGHT = 720
-FULLSCREEN = False
+FULLSCREEN = False # i don't know why this doesn't change anything but it sure doesn't
+
 
 # OUTPUT_WIDTH = 720
 # OUTPUT_HEIGHT = 720
@@ -42,7 +43,8 @@ dark = (0, 40, 0)
 # MAP_FOCUS = (32.7157, 117.1611)
 # MAP_FOCUS = (-92.1943197, 38.5653437)
 # MAP_FOCUS = (-98.0878917, 30.1914818) # Zap's Hometown
-MAP_FOCUS = (-71.0594587, 42.3614408)  # Boston MA
+# MAP_FOCUS = (-71.0594587, 42.3614408)  # Boston MA
+MAP_FOCUS = (41.15367 -81.35789) # Kent OH
 LOAD_CACHED_MAP = False
 
 # Open Strett Map settings
@@ -174,19 +176,19 @@ SPECIAL = [
      "Strength is a measure of your raw physical power. It affects how much you can carry, and the damage of all melee attacks."],
     ["Perception", 8, "images/stats/special/perception",
      "Perception is your environmental awareness and 'sixth sense', and affects weapon accuracy in V.A.T.S."],
-    ["Endurance", 3, "images/stats/special/endurance",
+    ["Endurance", 4, "images/stats/special/endurance",
      "Endurance is a measure of your overall physical fitness. It affect your total Health and the Action Point drain from sprinting."],
-    ["Charisma", 5, "images/stats/special/charisma",
+    ["Charisma", 7, "images/stats/special/charisma",
      "Charisma is your ability to charm and convince others. It affects your success to persuade in dialogue and prices when you barter."],
     ["Intelligence", 6, "images/stats/special/intelligence",
      'Intelligence is a measure of your overall metal acuity, and affects the number of Experience Points earned'],
     ["Agility", 3, "images/stats/special/agility",
      "Agility is a measure of your overall fitnesse and reflexes. It affects the number of Action Points in V.A.T.S. and your ability to sneak"],
-    ["Luck", 3, "images/stats/special/luck",
+    ["Luck", 5, "images/stats/special/luck",
      "Luck is a measure of your general good fortune, and affects the recharge rate of Critical Hits"],
 ]
 
-STATUS_FOOTER = ["HP 90/100", "LEVEL 120", "AP 90/90", 90, True]
+STATUS_FOOTER = ["HP 90/100", "LEVEL 52", "AP 90/90", 90, True]
 
 WEAPONS = [
     ["10mm Pistol", "1", "images/inventory/10mmpistol", "",
@@ -208,7 +210,7 @@ WEAPONS = [
      [["Damage", 150], ["Fire Rate", 0], ["Range", 93], ["Accuracy", 0], ["Weight", 0.5], ["Value", 100]]],
 ]
 
-FOOTER_WEAPONS = ["WEIGHT 186/200", "CAPS: 35", "AMMO: 500", None, False]
+FOOTER_WEAPONS = ["WEIGHT 72/200", "CAPS: 12056", "AMMO: 500", None, False]
 
 ARMOR = [
     ["Vault 111 Jumpsuit", "", "images/inventory/armor_suit", "", [["DMG Resist", 5], ["Weight", 1], ["Value", 20]]],
@@ -254,52 +256,52 @@ AMMO = [
 FOOTER_TIME = ["DATE", "TIME", "", None, False]
 
 QUESTS = [
-    ["War Never Changes","","images/quests/war_never_changes","Get to Vault 111. Survive."],
-    ["Out of Time","","images/quests/out_of_time",
-     "While cryogenically frozen in Vault 111, I awoke just long enough to witness the murder of my wife/husband and the abduction of my infant son. I need to escape Vault 111 and return home, so I can begin to make sense of this tragedy."],
+    ["Road to Freedom","images/quests/war_never_changes","Follow the Freedom Trail."],
+    ["When Freedom Calls","","images/quests/out_of_time", "Find the Last Minutemen."],
     ["Unlikely Valentine","","images/quests/unlikely_valentine",
      "Nick Valentine apparently went missing while investigating a case. If I want his help in locating Shaun, I'll need to find him first. His last known location was Park Street Station."],
-    ["Reunions","","images/quests/reunions",
-     "Kellogg is dead, and Shaun isn't here with him. I need to search around for some information that may lead me to my son."],
-    ["The Glowing Sea","","images/quests/the_glowing_sea",
-     "I need to find Virgil, the escaped Institute scientist, somewhere in the Glowing Sea and hope that he can help me reach the Institute."],
+    ["The Big Dig","","images/quests/reunions",
+     "I met Bobbi No-Nose in an alley in Goodneighbor and agreed to work for her. She hasn't told me much about the job."],
+    ["The Silver Shroud","","images/quests/the_glowing_sea",
+     "A ghoul named Kent Connolly wants to play caped crusader as the Silver Shroud. But he's missing a genuine Silver Shroud costume which can be found at a local Hubris Comics."],
 ]
 
 SKILLS = [
-    ["Action Boy"],
+    ["Awareness"],
     ["Animal Friend"],
     ["Awareness"],
     ["Gunslinger"],
     ["Hacker"],
-    ["Mysterious Stranger"],
+    ["Sniper"],
     ["Rifleman"],
-    ["Science"],
+    ["Toughness"],
 ]
 
 PERKS = [
-    ["Action Boy", 2, "images/perks/action_boy", "Your Action Points now regenerate 50% faster."],
     ["Animal Friend", 3, "images/perks/animal_friend",
      "When you successfully pacify an animal, you can give it specific commands."],
-    ["Awareness", 1, "images/perks/awareness",
-     "To defeat your enemies, know their weaknesses! You can view a target's specific damage resistances in V.A.T.S."],
-    ["Blacksmith", 3, "images/perks/blacksmith",
-     "Fire up the forge and gain access to base level and Rank 3 melee weapon mods."],
-    ["Fortune Finder", 1, "images/perks/fortune_finder",
-     "You've learned to discover the Wasteland's hidden wealth, and discover more bottle caps in containers."],
-    ["Gunslinger", 1, "images/perks/gunslinger",
-     "Channel the spirit of the old west! Non-automatic pistols do 20% more damage."],
+    ["Awareness", 2, "images/perks/awareness",
+     "Knowing their weaknesses lets you attack more efficiently. 5% increase to hit chance and damage dealt to VATS targets."],
+    ["Gunslinger", 5, "images/perks/gunslinger",
+     "Non-automatic pistols now do double damage. Their attacks have a much better chance to disarm opponents, and may even cripple a limb."],
     ["Hacker", 4, "images/perks/hacker", "When hacking, you never get locked out of a terminal when things go wrong."],
-    ["Lone Wanderer", 2, "images/perks/lone_wanderer",
-     "When adventuring without a companion, you take 30% less damage and carry weight increases by 100"],
-    ["Mysterious Stranger", 1, "images/perks/mysterious_stranger",
-     "Who is he? Why does he help? Who cares! The Mysterious Stranger will appear occasionally in V.A.T.S. to lend a hand, with deadly efficiency..."],
+    ["Inspirational", 2, "images/perks/action_boy", "Your companion resists more damage in combat, and can't be harmed by your attacks."],
+    ["Locksmith", 3, "images/perks/lone_wanderer",
+     "You can pick Master locks."],
+    ["Party Girl", 3, "images/perks/blacksmith",
+     "Your Luck is increased by 3 while you're under the influence of alcohol."],
     ["Rifleman", 5, "images/perks/rifleman",
      "Attacks with non-automatic rifles do double damage and ignore 30% of a target's armor. They also have a slightly higher chance of crippling a limb."],
-    ["Robotics Expert", 3, "images/perks/robotics_expert",
-     "Machines will always serve humans, if you have anything to say about it. Hack a robot, and gain a chance to power it on or off, or initiate a self-destruct."],
+    ["Scrapper", 3, "images/perks/robotics_expert",
+     "You get more from salvaging. Appears to only apply to uncommon components, i.e., those affected by the first level of the perk."],
     ["Sneak", 4, "images/perks/sneak",
-     "Become whisper, become shadow. You are 50% harder to detect while sneaking."],
-    ["Sniper",3,"images/perks/sniper/","It's all about focus. You have improved control and can hold your breath longer when aiming with scopes."],
+     "You are now 50% harder to detect while sneaking, and running no longer adversely affects stealth."],
+    ["Sniper",3,"images/perks/sniper/","Non-automatic, scoped rifles gain +25% accuracy to head shot in V.A.T.S."],
+    ["Solar Powered", 3, "images/perks/fortune_finder",
+     "Sunlight slowly regenerates your lost Health."],
+    ["Toughness", 4, "images/perks/mysterious_stranger",
+     "You now have +40 damage resistance."],
+
 ]
 
 # Detect if running on a Raspberry Pi
