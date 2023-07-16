@@ -4,7 +4,7 @@
 .settings
 lib
 *.mp3
-saved.py
+./saved.py/
 sounds/radio/03_DCR/desktop.ini
 sounds/radio/03_DCR/**
 sounds/radio/05_Institute/**
