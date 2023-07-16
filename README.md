@@ -8,7 +8,8 @@ and other such bells and whistles.
 
 ======
 
-Adding radio stations is now as easy as making a folder in sounds/radio with MP3, OGG or WAV files.
+Adding radio stations is now as easy as making a folder in sounds/radio with ~~MP3~~, OGG ~~or WAV~~ files.
+At this time, .ogg files have been hardcoded as the only type of supported audio files. I intend to fix this, but it is currently low on the list of priorities.
 Make a file name Station.py, with station_name = "Your name here" to set the menu text. The folder name used if the file is missing.
 Add a number to the beginning of the folder name to set the menu position.
 
