@@ -16,7 +16,7 @@ Add a number to the beginning of the folder name to set the menu position.
 
 Navigation:
 
-Over time, I plan to make clicking and/or tapping perform the necessary operations, but the keyboard controls will remain in for testing/convenience.
+Clicking can be used to navigate between the five main modules, but the original controls remain, unaltered.
 
 F1 - Stats
 F2 - Inventory
