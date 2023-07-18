@@ -119,6 +119,7 @@ class Pypboy(game.core.Engine):
 
         elif event.type == pygame.MOUSEBUTTONDOWN: # making the touch code synced with mouse for PC testing
             pos = pygame.mouse.get_pos()
+            #print("coords of click: ", pos[0], ", ", pos[1])
             if 48 <= pos[1] <= 88: # check if click is in bar row
                 if 100 <= pos[0] <= 170: # stat
                     self.handle_action("module_stats")
@@ -132,9 +133,45 @@ class Pypboy(game.core.Engine):
                     self.handle_action("module_radio")
                 else:
                     pass
+                print("\n\n", type(self.active), "\n\n") #testing module codes
+            elif 95 <= pos[1] <= 125: #click is a submodule, @TODO: make this a member function
+                if self.active == self.modules['stats']:
+                    if 95 <= pos[0] <= 195:
+                        self.handle_action("knob_1")
+                    elif 205 <= pos[0] <= 310:
+                        self.handle_action("knob_2")
+                    elif 325 <= pos[0] <= 410:
+                        self.handle_action("knob_3")
+                elif self.active == self.modules['items']:
+                    if 95 <= pos[0] <= 225:
+                        self.handle_action("knob_1")
+                    elif 235 <= pos[0] <= 350:
+                        self.handle_action("knob_2")
+                    elif 365 <= pos[0] <= 405:
+                        self.handle_action("knob_3")
+                    elif 410 <= pos[0] <= 485:
+                        self.handle_action("knob_4")
+                    elif 495 <= pos[0] <= 580:
+                        self.handle_action("knob_5")
 
+                elif self.active == self.modules['data']:
+                    if 95 <= pos[0] <= 245:
+                        self.handle_action("knob_1")
+                    elif 255 <= pos[0] <= 360:
+                        self.handle_action("knob_2")
+                    elif 370 <= pos[0] <= 440:
+                        self.handle_action("knob_3")
+                elif self.active == self.modules['map']:
+                    if 95 <= pos[0] <= 250:
+                        self.handle_action("knob_1")
+                    elif 260 <= pos[0] <= 410:
+                        self.handle_action("knob_2")
+                else:
+                    print("module has no subclick implementation")
 
-        elif event.type == pygame.FINGERDOWN: # handling touchscreen inputs, using switchmodule for now
+            print("horizontal click position: ", pos[0])
+
+        elif event.type == pygame.FINGERDOWN: # handling touchscreen inputs
             pos = pygame.finger.get_pos();
             if 48 <= pos[1] <= 88: # check if tap is in bar row
                 if 100 <= pos[0] <= 170: # stat

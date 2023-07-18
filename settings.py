@@ -308,8 +308,8 @@ PERKS = [
 PI = False
 if os.name == "posix":
     PI = True
-else:
-    PI - False
+#else:
+    #PI - False
 
 pygame.font.init()
 RobotoB = {}
@@ -397,4 +397,3 @@ holotape_generic = "images\inventory\holotape"
 # if time_past:
 #     max_fps = int(1 / time_past)
 #     print("Holotape render took:", time_past, "max fps:", max_fps)
-
