@@ -45,8 +45,6 @@ Supports caching and offline loading of maps.
 ======
 
 ## Autors
-* Touch and Mouse controls, as well as Fixes and Updates by cgruhler
-
 * Major overhaul by ZapWizard for the Functional Pip-Boy 3000 MK IV GUI
 
 * Fixes and Updates by kingpinzs
@@ -58,6 +56,8 @@ Supports caching and offline loading of maps.
 * Updates by Sabas of The Inventor's House Hackerspace
 
 * Originally by grieve work original<br>
+
+* Touch and Mouse controls, as well as Fixes and Updates by cgruhler
 
 ======
 
